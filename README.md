@@ -5,5 +5,5 @@ HackJobs is a free open source job and hiring site inspired by hackernews. Any m
 
 HackJobs is the one stop place for programmers for getting details about new jobs.
 
-![Alt text](/img/screenshot.png?raw=true "Design")
+![Alt text](/img/scrrenshot.png?raw=true "Design")
 
