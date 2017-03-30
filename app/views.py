@@ -9,3 +9,9 @@ dbSetUp()
 @app.route('/home')
 def home():
     return render_template('index.html')
+
+
+
+@app.route('/add')
+def addContent():
+    return render_template('add.html')
