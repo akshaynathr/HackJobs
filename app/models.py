@@ -1,6 +1,8 @@
 import rethinkdb as r
 from rethinkdb.errors import RqlRuntimeError
 
+
+
 def dbSetUp():
     connection=r.connect(host='localhost',port=28015)
     try:
