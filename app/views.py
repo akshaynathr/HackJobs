@@ -5,7 +5,7 @@ import rethinkdb as r
 app=Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 
-dbSetUp()
+#dbSetUp()
 
 @app.route('/')
 @app.route('/home')
@@ -81,7 +81,7 @@ def add():
 
 
         return render_template('add.html')
-    else if request.method=='POST':
+    elif request.method=='POST':
         title=request.form['title']
         link=request.form['link']
         text=request.form['text']
