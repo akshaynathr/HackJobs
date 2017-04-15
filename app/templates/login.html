@@ -9,8 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hack Jobs:Post Jobs </title>
-
+    <title>Hack Jobs: Hackernews for programming jobs</title>
 
     <!-- Bootstrap Core CSS -->
     <link href={{ url_for('static',filename="css/bootstrap.min.css") }} rel="stylesheet">
@@ -54,7 +53,7 @@
                 </li>
 
                 <li>
-        <p style="color:#fff;text-align:ceter;" >   hackjobs&copy; 2017</p>
+		<p style="color:#fff;text-align:ceter;"	>	hackjobs&copy; 2017</p>
 
                 </li>
             </ul>
@@ -71,25 +70,20 @@
 			    <h5><b> Hack Jobs</b></h5>
 			    
 		    </div>
-                    <div class="col-lg-10" id="main">
-          <label> Add new job</label><br><br>
-		  <label for="title"> Title </label>
-		    <input type="text" class="form-control" id="usr">
-		  <label for="title"> Link </label>
-		    <input type="text" class="form-control" id="usr">
+                    <div class="col-lg-9" id="main">
+                    <br>
+				    <label>Login</label><br>
+			         <div style="text-align: center;">
 
-
-			 
-			    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-	    <div class="form-group">
-		  <label for="comment">Text:</label>
-		  <textarea class="form-control" rows="5" id="comment"></textarea>
-
-	    </div>
-
-		    <input style="float:right" type="submit" class="btn btn-info" value="Submit ">
-
-
+                            <form method="POST" >
+                                <input type="text" class="form-control" name="username" placeholder="Username">
+                                <input type="text" class="form-control" name="password" placeholder="Password">
+                                <input type="submit" class="btn" ><br>
+                                <a href="/register">Register</a>
+                            </form>
+                      </div>
+		
+			
                 </div>
             </div>
         </div>
