@@ -53,7 +53,7 @@
                 </li>
 
                 <li>
-        <p style="color:#fff;text-align:ceter;" >   hackjobs&copy; 2017</p>
+        <p style="color:rgba(255,255,255,.4);text-align:ceter;" >   hackjobs&copy; 2017</p>
 
                 </li>
             </ul>
@@ -67,11 +67,25 @@
 
 		    <div class="col-lg-10" id="top">
 
-			    <h5><b> Hack Jobs</b></h5>
+                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs</a></b></h5>
 			    
 		    </div>
+            {% for r in results %}
+
+
+                  <div class="col-lg-9" id="main">
+                
+
+                <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
+                <h5 style="font-size:85%"><a href={{ r.link }} ><b>r.title</b></a></h5>
+            <p style="font-size:70%;"> {{ r.text }} </p>
+                    </div>
+
+
+            {% endfor %}
                     <div class="col-lg-9" id="main">
 				
+
 			    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
 			    <h5 style="font-size:85%"><b>1.Github inc. Software engineer.</b></h5>
 			<p style="font-size:70%;"> Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
