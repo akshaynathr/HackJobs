@@ -1,16 +1,19 @@
-from flask import Flask, render_template,request,session
+from flask import Flask, render_template,request,session,redirect,url_for
 from models import dbSetUp
 import rethinkdb as r
 
 app=Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
-
-#dbSetUp()
+dbSetUp()
 
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('index.html')
+    connection=r.connect('localhost',28015)
+    result=list(r.db('hackjobs').table('post').order_by(r.desc('time')).run(connection))
+    connection.close()
+
+    return render_template('index.html',results=result)
 
 
 
@@ -21,8 +24,8 @@ def postJobs():
     if request.method=='POST':
         title=request.form['title']
         link=request.form['link']
-        details=request.form['details']
-        if session['id']:
+        details=request.form['text']
+        if session.get('id',None):
 
             userid=session['id']
             connection=r.connect('localhost',28015)
@@ -38,20 +41,27 @@ def postJobs():
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method=='GET':
-        try:
-            if session['id']:
-                pass
-            else:
+        if session.get('id',None):
+            return render_template('add.html')
+        else:
 
-                return render_template('login.html')
-        except :
-                return render_template('login.html')
+            return render_template('login.html')
+    
+              
     if request.method=='POST':
         username=request.form['username']
         password=request.form['password']
         connection=r.connect('localhost',28015)
-        user=list(r.db('hackjobs').table('user').filter((r.row['username']) & (r.row['password']) ).count().run(connection))
+        count=r.db('hackjobs').table('user').filter((r.row['username']==username) & (r.row['password']==password) ).count().run(connection)
+        user=list(r.db('hackjobs').table('user').filter((r.row['username']==username) & (r.row['password']==password) ).run(connection))
+        
         connection.close()
+        print(count)
+        if count==1:
+            session['id']=user[0]['id']
+            return redirect(url_for('user'))
+        else:
+            return "No user"
 
         
 @app.route('/register',methods=['GET','POST'])
@@ -72,14 +82,13 @@ def register():
         password=request.form['password']
         connection=r.connect('localhost',28015)
         r.db('hackjobs').table('user').insert({'name':name,'username':username,'password':password,'email':email}).run(connection)
-        return "Done"
+        user=list(r.db('hackjobs').table('user').filter((r.row['username']==username) & (r.row['password']==password) ).run(connection))
+        session['id']=user[0]['id']
+        return redirect(url_for('user'))
 
 @app.route('/add',methods=['GET','POST'])
 def add():
     if request.method=='GET':
-        
-
-
         return render_template('add.html')
     elif request.method=='POST':
         title=request.form['title']

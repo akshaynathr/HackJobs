@@ -9,6 +9,7 @@ def dbSetUp():
         r.db_create('hackjobs').run(connection)
         r.db('hackjobs').table_create('user').run(connection)
         r.db('hackjobs').table_create('post').run(connection)
+        r.db('hackjobs').table('post').index_create('time').run(connection)
         print("Database setup completed")
     except RqlRuntimeError:
         print("Database running Okay")
