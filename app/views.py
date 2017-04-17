@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,session,redirect,url_for
+from flask import Flask, render_template,request,session,redirect,url_for,flash
 from models import dbSetUp
 import rethinkdb as r
 
@@ -44,7 +44,7 @@ def postJobs():
 def login():
     if request.method=='GET':
         if session.get('id',None):
-            return render_template('add.html')
+            return render_template('user.html')
         else:
 
             return render_template('login.html')
@@ -110,3 +110,20 @@ def user():
             return render_template('user.html',name=user[0]['name'])
         else:
             return redirect(url_for('login'))
+
+@app.route('/about',methods=['GET'])
+def about():
+    return render_template('about.html')
+
+
+@app.route('/logout')
+def logout():
+    if session.get('id',None):
+        session.pop('id',None)
+        flash("Successfully logged out.")
+
+        return redirect(url_for('login'))
+    else:
+        flash("Please login first.")
+
+        return redirect(url_for('login'))

@@ -74,7 +74,15 @@
                     <br>
 				    <label>Login</label><br>
 			         <div style="text-align: center;">
-
+                        {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                <ul class=flashes style="text-decoration-style: none; color: white;list-style: none; background-color: green;">
+                                {% for message in messages %}
+                                  <li><b>{{ message }}</b></li>
+                                {% endfor %}
+                                </ul>
+                              {% endif %}
+                            {% endwith %}
                             <form method="POST" >
                                 <input type="text" class="form-control" name="username" placeholder="Username">
                                 <input type="text" class="form-control" name="password" placeholder="Password">
