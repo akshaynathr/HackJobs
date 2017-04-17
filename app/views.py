@@ -17,6 +17,8 @@ def home():
 
 
 
+
+
 @app.route('/post',methods=['GET','POST'])
 def postJobs():
     if request.method=='GET':
@@ -97,3 +99,14 @@ def add():
         connection=r.connect('localhost',28015)
         r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text}).run(connection)
         return "Done"
+
+
+@app.route('/user',methods=['GET','POST'])
+def user():
+    if request.method=='GET':
+        if session.get('id',None):
+            connection=r.connect('localhost',28015)
+            user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
+            return render_template('user.html',name=user[0]['name'])
+        else:
+            return redirect(url_for('login'))

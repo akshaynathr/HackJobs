@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hack Jobs: Hackernews for programming jobs</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href={{ url_for('static',filename="css/bootstrap.min.css") }} rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href={{ url_for('static',filename="css/simple-sidebar.css") }} rel="stylesheet">
+	<style>
+		#top { background-color:red; }
+
+	</style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper" class="toggled">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                </li>
+                <li>
+                    <a href="/login"><b>Login</b></a>
+                </li>
+                <li>
+                    <a href="#"></a>
+                </li>
+               <li>
+                    <a href="/about">About</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+
+                <li>
+        <p style="color:rgba(255,255,255,.4);text-align:ceter;" >   hackjobs&copy; 2017</p>
+
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+
+		    <div class="col-lg-10" id="top">
+
+                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs</a></b></h5>
+			    
+		    </div>
+                    <div class="col-lg-9" id="main">
+                    <br>
+				    <label>Welcome to Hackjobs</label><br>
+			        
+		
+			
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static',filename='js/jquery.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
