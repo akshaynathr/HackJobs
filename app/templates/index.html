@@ -71,54 +71,25 @@
                 <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs</a></b></h5>
 			    
 		    </div>
+
             {% for r in results %}
-
-
+                    
+                {% set c=count %}
                   <div class="col-lg-10" id="main">
                 
 
                 <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-                <h5 style="font-size:85%"><a href={{ r.link }} ><b>r.title</b></a></h5>
+                <h5 style="font-size:85%; margin-bottom:5px;"><a href={{ r.link }} target="blank"><b>{{loop.index}}. {{r.title}}</b></a><i style="color: rgba(0,0,0,.4); font-size: 70%; margin-left:10px;">({{r.link}})</i></h5>
             <p style="font-size:70%;"> {{ r.text }} </p>
                     </div>
-
-
+                   
             {% endfor %}
-                    <div class="col-lg-10" id="main">
-				
-
-			    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-			    <h5 style="font-size:85%"><b>1.Github inc. Software engineer.</b></h5>
-			<p style="font-size:70%;"> Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-                    </div>
-
-		     <div class="col-lg-10" id="main">
-				
-			    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-			    <h5 style="font-size:85%"><b>2.Lego bots.Software design engineer.</b></h5>
-			<p style="font-size:70%;"> Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.  Lorem ipsum lorem ipsum lorem ipsum l Lorem ipsum lorem ipsum lorem ipsum l Lorem ipsum lorem ipsum lorem ipsum l </p>
-                    </div>
-
-	     <div class="col-lg-9" id="main">
-				
-			    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-			    <h5 style="font-size:85%"><b>3.RazorPay. Machine learning intern.</b></h5>
-			<p style="font-size:70%;"> Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.  Lorem ipsum lorem ipsum lorem ipsum l Lorem ipsum lorem ipsum lorem ipsum l Lorem ipsum lorem ipsum lorem ipsum l </p>
-                    </div>
-
-		<div class="col-lg-9" id="main">
-				
-			    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-			    <h5 style="font-size:85%"><b>4.Internship at magicleap.</b></h5>
-			<p style="font-size:70%;"> Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.  Lorem ipsum lorem ipsum lorem ipsum l Lorem ipsum lorem ipsum lorem ipsum l Lorem ipsum lorem ipsum lorem ipsum l </p>
-                    </div>
-
-
-		
-			
-                </div>
+                <br/>
+               <div class="col-lg-10" id="bottom">
+               {% set c=count+1 %}
+                <a href="/?count={{ c }}" style="text-decoration:none; font-size: 11px; color: rgba(0,0,0,.4);"> More>>  </a>
             </div>
-        </div>
+
         <!-- /#page-content-wrapper -->
 
     </div>

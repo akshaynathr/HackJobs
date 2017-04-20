@@ -1,19 +1,21 @@
 from flask import Flask, render_template,request,session,redirect,url_for,flash
 from models import dbSetUp
 import rethinkdb as r
-
+from pagination import Pagination
 app=Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 dbSetUp()
 
-@app.route('/')
-@app.route('/home')
-def home():
+@app.route('/', defaults={'page': 1})
+@app.route('/page/<int:page>')
+def home(page):
     connection=r.connect('localhost',28015)
     result=list(r.db('hackjobs').table('post').order_by(r.desc('time')).run(connection))
     connection.close()
 
-    return render_template('index.html',results=result)
+    
+
+    return render_template('index.html',results=result,count=int(page))
 
 
 
@@ -91,13 +93,17 @@ def register():
 @app.route('/add',methods=['GET','POST'])
 def add():
     if request.method=='GET':
-        return render_template('add.html')
+        if session.get('id',None):
+            return render_template('login.html')
+        else:
+            return render_template('add.html')
     elif request.method=='POST':
         title=request.form['title']
         link=request.form['link']
         text=request.form['text']
+        userid=session['id']
         connection=r.connect('localhost',28015)
-        r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text}).run(connection)
+        r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text,'userid':userid}).run(connection)
         return "Done"
 
 
@@ -127,3 +133,4 @@ def logout():
         flash("Please login first.")
 
         return redirect(url_for('login'))
+
