@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon"  href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <title>Hack Jobs: Hackernews for programming jobs</title>
 
     <!-- Bootstrap Core CSS -->
@@ -66,28 +67,41 @@
             <div class="container-fluid">
                 <div class="row">
 
-		    <div class="col-lg-10" id="top">
+		  <div class="col-lg-10" id="top">
 
-                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs</a></b></h5>
-			    
-		    </div>
+                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs </a></b>|                    <a href="/add" style="color: black; text-decoration:none;">submit</a>
+<p style="float:right;">{{ name }}    <a href="/logout" style="color: black; text-decoration:none;">{{ logout}}</a></p></h5>
+                
+            </div>
 
             {% for r in results %}
                     
-                {% set c=count %}
-                  <div class="col-lg-10" id="main">
+                   <div class="col-lg-10" id="main">
                 
 
                 <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-                <h5 style="font-size:85%; margin-bottom:5px;"><a href={{ r.link }} target="blank"><b>{{loop.index}}. {{r.title}}</b></a><i style="color: rgba(0,0,0,.4); font-size: 70%; margin-left:10px;">({{r.link}})</i></h5>
-            <p style="font-size:70%;"> {{ r.text }} </p>
+                <h5 style="font-size:85%; margin-bottom:5px;">
+
+                    <a href={{ r.link }} target="_blank"><b>{{loop.index}}. {{r.title}}</b></a><i style="color: rgba(0,0,0,.4); font-size: 70%; margin-left:10px;">({{r.link}}) {{ r.time.strftime('%Y-%m-%d')  }} </i>
+
+                </h5>
+
+                    <p style="font-size:70%;">{{ r.text }} </p>
                     </div>
                    
             {% endfor %}
+
+
+
                 <br/>
+
+
+
                <div class="col-lg-10" id="bottom">
+               {% if count is not defined %}
                {% set c=count+1 %}
                 <a href="/?count={{ c }}" style="text-decoration:none; font-size: 11px; color: rgba(0,0,0,.4);"> More>>  </a>
+                {% endif %}
             </div>
 
         <!-- /#page-content-wrapper -->

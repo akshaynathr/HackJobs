@@ -5,17 +5,27 @@ from pagination import Pagination
 app=Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 dbSetUp()
-
-@app.route('/', defaults={'page': 1})
+PAGE_LIMIT=30
+@app.route('/', defaults={'page': 0})
 @app.route('/page/<int:page>')
 def home(page):
     connection=r.connect('localhost',28015)
-    result=list(r.db('hackjobs').table('post').order_by(r.desc('time')).run(connection))
-    connection.close()
-
+    name=''
+    logout=''
+    c=r.db('hackjobs').table('post').count().run(connection)
+    skip_no=PAGE_LIMIT*page
+    result=list(r.db('hackjobs').table('post').order_by(index=r.desc('time')).skip(skip_no).limit(PAGE_LIMIT).run(connection))
+    if skip_no+30>=c:
+        page=None
+        print ("SFSFF")
+    if session.get('id',None):
+        user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
+        name=user[0]['name']
+        logout='(logout)'
     
-
-    return render_template('index.html',results=result,count=int(page))
+    connection.close()
+    
+    return render_template('index.html',results=result,count=page,name=name,logout=logout)
 
 
 
@@ -24,7 +34,7 @@ def home(page):
 @app.route('/post',methods=['GET','POST'])
 def postJobs():
     if request.method=='GET':
-        return render_template('add.html')
+        return redirect(url_for('add'))
     if request.method=='POST':
         title=request.form['title']
         link=request.form['link']
@@ -40,15 +50,15 @@ def postJobs():
 
 
 
-
-
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method=='GET':
         if session.get('id',None):
-            return render_template('user.html')
+            return redirect(url_for('user'))
         else:
+            
 
+        
             return render_template('login.html')
     
               
@@ -65,15 +75,16 @@ def login():
             session['id']=user[0]['id']
             return redirect(url_for('user'))
         else:
-            return "No user"
+            flash("No user found")
+            return render_template('login.html')
 
         
 @app.route('/register',methods=['GET','POST'])
 def register():
     if request.method=='GET':
         try:
-            if session['id']:
-                pass
+            if session.get('id',None):
+                return redirect(url_for('user'))
             else:
 
                 return render_template('register.html')
@@ -90,21 +101,23 @@ def register():
         session['id']=user[0]['id']
         return redirect(url_for('user'))
 
+
+
 @app.route('/add',methods=['GET','POST'])
 def add():
     if request.method=='GET':
         if session.get('id',None):
-            return render_template('login.html')
+            return render_template('add.html',logout='logout')
         else:
-            return render_template('add.html')
+            return redirect(url_for('login'))
     elif request.method=='POST':
         title=request.form['title']
         link=request.form['link']
         text=request.form['text']
         userid=session['id']
         connection=r.connect('localhost',28015)
-        r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text,'userid':userid}).run(connection)
-        return "Done"
+        r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text,'userid':userid,'time':r.now()}).run(connection)
+        return redirect(url_for('home'))
 
 
 @app.route('/user',methods=['GET','POST'])
@@ -113,7 +126,9 @@ def user():
         if session.get('id',None):
             connection=r.connect('localhost',28015)
             user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
-            return render_template('user.html',name=user[0]['name'])
+            result=list(r.db('hackjobs').table('post').order_by(index=r.desc('time')).filter(r.row['userid']==session['id']).run(connection))
+
+            return render_template('user.html',name=user[0]['name'],result=result,logout='(logout)')
         else:
             return redirect(url_for('login'))
 
@@ -121,6 +136,9 @@ def user():
 def about():
     return render_template('about.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 @app.route('/logout')
 def logout():

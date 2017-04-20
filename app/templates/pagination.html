@@ -18,6 +18,7 @@
     <link href={{ url_for('static',filename="css/simple-sidebar.css") }} rel="stylesheet">
 	<style>
 		#top { background-color:red; }
+        .main { background-color: #F6F6EF; }
 
 	</style>
 
@@ -46,7 +47,7 @@
                     <a href="#"></a>
                 </li>
                <li>
-                    <a href="/about"><b>About</b></a>
+                    <a href="/about">About</a>
                 </li>
                 <li>
                     <a href="#">Contact</a>
@@ -67,33 +68,30 @@
 
 		    <div class="col-lg-10" id="top">
 
-                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs</a></b>(beta)</h5>
+                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs</a></b></h5>
 			    
 		    </div>
-                    <div class="col-lg-10" id="main">
-                    <br>
-				    <h4>Hackjobs is Hackernews for Jobs</h4>
-			        
-                    <p>Hackjobs is a free open site to find jobs/internship news in tech, inspired by the simplicity of Hackernews.</p>                    <br>
-
-                    <h4>What problem are we trying to solve?</h4>
-
-                    <p>Companies and startups post their job and internship openings in their sites.This is scattered throughout web.Sometimes people miss important openings. Hackjobs aims to become a community driven job/internship news listing site for programmers and technical people. </p>                    <br>
-
-                     <h4>How hackjobs is different from other job listing sites?</h4>
-
-                    <p>Just like hackernews, anyone can post details about job openings in hackjobs.Hackjobs do not connect with any companies or  users in any manner. It is completely free to use for anyone.Only the title,link and short text details can be posted.  </p>
-                    <br>
-
-
-                    <h4> Is hackjobs related to hackernews or ycombinator?</h4>
-                    <p> No. Hackjobs is not related to hackernews or ycombinator in any manner. Hackjobs is inspired by the simplicity of hackernews. Hackjobs aims to become the online front page for jobs openings news just like hackernews is for technews.</p>
-		           <br>
-                   <h4>Is the site only for programming jobs?</h4>
-                   <p> Hackjobs encourage job/intership news related to technology. It can be programming, hardware or anything that involves technical expertise.</p>
-			
+                 {% macro render_pagination(pagination) %}
+                  <div class=pagination>
+                  {%- for page in pagination.iter_pages() %}
+                    {% if page %}
+                      {% if page != pagination.page %}
+                        <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+                      {% else %}
+                        <strong>{{ page }}</strong>
+                      {% endif %}
+                    {% else %}
+                      <span class=ellipsis>…</span>
+                    {% endif %}
+                  {%- endfor %}
+                  {% if pagination.has_next %}
+                    <a href="{{ url_for_other_page(pagination.page + 1)
+                      }}">Next &raquo;</a>
+                  {% endif %}
+                  </div>
+                {% endmacro %}
+             
                 </div>
-            </div>
         </div>
         <!-- /#page-content-wrapper -->
 

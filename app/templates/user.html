@@ -53,7 +53,7 @@
                 </li>
 
                 <li>
-        <p style="color:rgba(255,255,255,.4);text-align:ceter;" >   hackjobs&copy; 2017</p>
+        <p style="color:rgba(255,255,255,.4);text-align:center;" >   hackjobs&copy; 2017</p>
 
                 </li>
             </ul>
@@ -67,12 +67,32 @@
 
 		    <div class="col-lg-10" id="top">
 
-                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs</a></b></h5>
+                <h5><b><a style="color:black; text-decoration:none;" href="/"> Hack Jobs </a></b>|                    <a href="/add" style="color: black; text-decoration:none;">submit</a>
+<p style="float:right;">{{ name }}    <a href="/logout" style="color: black; text-decoration:none;">{{ logout}}</a></p></h5>
 			    
 		    </div>
-                    <div class="col-lg-9" id="main">
+                    <div class="col-lg-10" id="main">
                     <br>
-				    <label>Welcome {{ name }}</label><br>
+				   <hr>
+                   <p>Your posts:<p/>
+                   {% if result is not defined %}
+                        No posts yet
+
+                    {% endif %}
+                {% for r in result %}
+                    
+                {% set c=count %}
+                  <div class="col-lg-10" id="main">
+                
+
+                <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
+                <h5 style="font-size:85%; margin-bottom:5px;"><a href={{ r.link }} target="blank"><b>{{loop.index}}. {{r.title}}</b></a><i style="color: rgba(0,0,0,.4); font-size: 70%; margin-left:10px;">({{r.link}})</i></h5>
+            <p style="font-size:70%;"> {{ r.text }} </p>
+                    </div>
+                   
+            {% endfor %}
+                   
+
 			        
 		
 			
