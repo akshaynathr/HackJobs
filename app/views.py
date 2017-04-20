@@ -1,7 +1,6 @@
 from flask import Flask, render_template,request,session,redirect,url_for,flash
 from models import dbSetUp
 import rethinkdb as r
-from pagination import Pagination
 app=Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 dbSetUp()
