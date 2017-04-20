@@ -5,6 +5,14 @@ app=Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 dbSetUp()
 PAGE_LIMIT=30
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+
 @app.route('/', defaults={'page': 0})
 @app.route('/page/<int:page>')
 def home(page):
@@ -13,7 +21,7 @@ def home(page):
     logout=''
     c=r.db('hackjobs').table('post').count().run(connection)
     skip_no=PAGE_LIMIT*page
-    result=list(r.db('hackjobs').table('post').order_by(index=r.desc('time')).skip(skip_no).limit(PAGE_LIMIT).run(connection))
+    result=list(r.db('hackjobs').table('post').order_by(index=r.desc('time')).run(connection))
     if skip_no+30>=c:
         page=None
         print ("SFSFF")
