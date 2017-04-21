@@ -83,8 +83,8 @@ mixpanel.init("8b67a95c1665cb191b3e21c193c25d9f");</script><!-- end Mixpanel -->
                               {% endif %}
                             {% endwith %}
                             <form method="POST" >
-                                <input type="text" class="form-control" name="username" placeholder="Username">
-                                <input type="password" class="form-control" name="password" placeholder="Password">
+                                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                <input type="password" class="form-control" name="password" placeholder="Password" required>
                                 <input type="submit" class="btn" ><br>
                                 <a href="/register">Register</a>
                             </form>

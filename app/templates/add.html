@@ -17,10 +17,7 @@
 
     <!-- Custom CSS -->
     <link href={{ url_for('static',filename="css/simple-sidebar.css") }} rel="stylesheet">
-	<style>
-		#top { background-color:red; }
-
-	</style>
+	 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,18 +70,18 @@
 		    </div>
                     <div class="col-lg-10" id="main">
                     <form method="POST">
-          <label> Add new job</label><br><br>
+          <label> Add new post</label><br><br>
 		  <label for="title"> Title </label>
-		    <input type="text" class="form-control" name="title" id="usr">
+		    <input type="text" required  class="form-control" name="title" id="usr">
 		  <label for="title"> Link </label>
-		    <input type="url" class="form-control" name="link" id="usr">
+		    <input type="url" class="form-control" name="link" id="usr" required>
 
 
 			 
 			    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
 	    <div class="form-group">
 		  <label for="comment">Text:</label>
-		  <textarea class="form-control" rows="5" name="text" id="comment"></textarea>
+		  <textarea class="form-control" rows="5" name="text" id="comment" required></textarea>
 
 	    </div>
 
