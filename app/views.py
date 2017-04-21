@@ -1,10 +1,30 @@
 from flask import Flask, render_template,request,session,redirect,url_for,flash
 from models import dbSetUp
 import rethinkdb as r
+from logging import  *
+from logging.handlers import RotatingFileHandler
+ 
 app=Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 dbSetUp()
+
+SLACK_TOKEN='xoxp-172682679506-172013634224-172615497219-9bac543ac290d62c8b199bf1ae51ddfb'
+
 PAGE_LIMIT=30
+
+from slacker_log_handler import SlackerLogHandler
+slack_handler = SlackerLogHandler('xoxp-172682679506-172013634224-172615497219-9bac543ac290d62c8b199bf1ae51ddfb',
+                                  'post',
+                                  stack_trace=True,
+                                  username='site-bot')
+slack_handler.setFormatter(Formatter('%(message)s'))
+file_handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
+
+file_handler.setLevel(INFO)
+app.logger.addHandler(slack_handler)
+
+
+
 
 
 @app.errorhandler(404)
@@ -122,6 +142,7 @@ def add():
         link=request.form['link']
         text=request.form['text']
         userid=session['id']
+        app.logger.info('New post added:'+title+' Link:'+link+' '+' Text:'+text)
         connection=r.connect('localhost',28015)
         r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text,'userid':userid,'time':r.now()}).run(connection)
         return redirect(url_for('home'))
