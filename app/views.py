@@ -159,3 +159,14 @@ def logout():
 
         return redirect(url_for('login'))
 
+@app.route('/asfadf98fsadfa9090232asdfJSf90' ,methods=['GET','POST'])
+def admin():
+    if request.method=='GET':
+        return render_template('admin.html')
+    else:
+        title=request.form['delete']
+        connection=r.connect('localhost',28015)
+        r.db('hackjobs').table('post').filter(r.row['title']==title).delete().run(connection)
+        connection.close()
+        flash(title+"deleted successfully")
+        return render_template('admin.html')
