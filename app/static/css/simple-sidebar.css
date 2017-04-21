@@ -38,7 +38,7 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 200px;
+    width: 250px;
 }
 
 #page-content-wrapper {
@@ -127,3 +127,9 @@
         margin-right: 0;
     }
 }
+
+#top { background-color:#fff; padding: .5%; border:1px solid #111; }
+#main { background-color: rgb(244,244,244);}
+#post  { color: #000; }
+
+input { margin: 5px; text-align: center; }
