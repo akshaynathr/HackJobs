@@ -166,7 +166,11 @@ def admin():
     else:
         title=request.form['delete']
         connection=r.connect('localhost',28015)
-        r.db('hackjobs').table('post').filter(r.row['title']==title).delete().run(connection)
-        connection.close()
-        flash(title+"deleted successfully")
+        count=r.db('hackjobs').table('post').filter(r.row['title']==title).count().run(connection)
+        if count==0:
+            flash("No post found")
+        else:
+            r.db('hackjobs').table('post').filter(r.row['title']==title).delete().run(connection)
+            connection.close()
+            flash(title+"deleted successfully")
         return render_template('admin.html')
