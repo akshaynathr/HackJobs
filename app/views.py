@@ -24,7 +24,7 @@ def home(page):
     result=list(r.db('hackjobs').table('post').order_by(index=r.desc('time')).run(connection))
     if skip_no+30>=c:
         page=None
-        print ("SFSFF")
+        
     if session.get('id',None):
         user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
         name=user[0]['name']
@@ -77,7 +77,7 @@ def login():
         user=list(r.db('hackjobs').table('user').filter((r.row['username']==username) & (r.row['password']==password) ).run(connection))
         
         connection.close()
-        print(count)
+         
         if count==1:
             session['id']=user[0]['id']
             return redirect(url_for('user'))
