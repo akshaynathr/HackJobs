@@ -28,7 +28,7 @@ app.logger.addHandler(slack_handler)
 
 @app.errorhandler(404)
 def page_not_found(e):
-    app.logger.info('404 error')
+    app.logger.info('404 error'+request.url)
     return render_template('404.html'), 404
 
 
