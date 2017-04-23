@@ -14,7 +14,7 @@
 @media screen and (max-width: 740px)
 {
     .small_menu{display: visible;}
-
+    #wrapper { padding-left: 0; }
    #sidebar-wrapper{ display: none;}
 
 #top { background-color:#fff; padding: .5%; border:1px solid #111; }
