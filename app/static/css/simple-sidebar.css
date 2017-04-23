@@ -11,12 +11,12 @@
 
 /* Toggle Styles */
 
-@media screen and (max-width: 579px)
+@media screen and (max-width: 740px)
 {
     .small_menu{display: visible;}
 
    .sidebar-nav { display: none;}
-   
+
 #top { background-color:#fff; padding: .5%; border:1px solid #111; }
 #main { background-color: rgb(244,244,244);}
 #post  { color: #000; }
