@@ -15,7 +15,7 @@
 {
     .small_menu{display: visible;}
 
-   .sidebar-nav { display: none;}
+   #sidebar-wrapper{ display: none;}
 
 #top { background-color:#fff; padding: .5%; border:1px solid #111; }
 #main { background-color: rgb(244,244,244);}
