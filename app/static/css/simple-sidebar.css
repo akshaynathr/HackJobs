@@ -13,11 +13,12 @@
 
 @media screen and (max-width: 740px)
 {
+
     .small_menu{display: visible;}
     #wrapper { padding-left: 0; }
    #sidebar-wrapper{ display: none;}
 
-#top { background-color:#fff; padding: .5%; border:1px solid #111; }
+#top { background-color:#fff; padding: .5%; border:1px solid #111; padding-left:5px;}
 #main { background-color: rgb(244,244,244);}
 #post  { color: #000; }
 
@@ -26,7 +27,8 @@ input { margin: 5px; text-align: center;
    /*.sidebar-nav li { display: inline-block;background-color: #333; border-right: 1px solid black;padding: 5px; }
    #brand {display: none;}*/
 }
-@media screen and (min-width: 580px) {
+@media screen and (min-width: 741px) {
+    
    .small_menu{ display: none; }
 #wrapper {
     padding-left: 0;
@@ -77,6 +79,7 @@ input { margin: 5px; text-align: center;
     top: 0;
     width: 250px;
     margin: 0;
+    margin-top: 10px;
     padding: 0;
     list-style: none;
 }
