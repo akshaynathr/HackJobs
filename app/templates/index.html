@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Hackjobs is online job board like hackernews maintained by community.">
+    <meta name="author" content="Akshaynath R">
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon"  href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <title>Hack Jobs: Hackernews for programming jobs</title>
@@ -79,11 +79,11 @@ mixpanel.init("8b67a95c1665cb191b3e21c193c25d9f");</script><!-- end Mixpanel -->
                 
 
                 <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
-                <h5 style="font-size:95%; margin-bottom:5px;">
+                <p style="font-size:95%; display:inline;margin-bottom:5px; margin-right: 0px;">
 
-                    <a id="post" style="color: black;" href={{ r.link }} target="_blank">{{loop.index}}. {{r.title}}</a><i style="color: rgba(0,0,0,.4); font-size: 70%; margin-left:10px;">({{r.link}}) {{ r.time.strftime('%Y-%m-%d')  }} </i>
+                    <a id="post" style="color: black;" href={{ r.link }} target="_blank">{{loop.index}}. {{r.title}}</a></p><i style="color: rgba(0,0,0,.4); font-size: 70%; margin-left:10px;">({{r.link}}) {{ r.time.strftime('%Y-%m-%d')  }} </i><br>
 
-                </h5>
+                
 
                     <p style="font-size:70%;">{{ r.text }} </p>
                     </div>
