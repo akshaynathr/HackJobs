@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon"  href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <title>Hack Jobs: Hackernews for programming jobs</title>
+    <script charset="UTF-8" src="//cdn.sendpulse.com/28edd3380a1c17cf65b137fe96516659/js/push/c7eea1085166ff845eddd13ccef6aa8c_1.js" async></script>
 
     <!-- Bootstrap Core CSS -->
     <link href={{ url_for('static',filename="css/bootstrap.min.css") }} rel="stylesheet">
@@ -85,7 +86,7 @@ mixpanel.init("8b67a95c1665cb191b3e21c193c25d9f");</script><!-- end Mixpanel -->
                 
 
                     <p style="font-size:70%;">{{ r.text }} </p>
-                    </div>
+                     </div>
                    
             {% endfor %}
 
