@@ -4,8 +4,9 @@ import rethinkdb as r
 from logging import  *
 from logging.handlers import RotatingFileHandler
 import os
+import json
 
-app=Flask(__name__)
+app=Flask(__name__, static_folder='static')
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 dbSetUp()
 
@@ -22,7 +23,9 @@ file_handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
 file_handler.setLevel(ERROR)
 app.logger.addHandler(slack_handler)
 
-
+@app.route('/test')
+def test():
+    return render_template('index2.html')
 
 
 
@@ -195,3 +198,26 @@ def admin():
             connection.close()
             flash(title+"deleted successfully")
         return render_template('admin.html')
+
+
+
+# @app.route('/news/<news_id>')
+# def news(news_id):
+#     connection=r.connect('localhost',28015)
+#     #count=r.db('hackjobs').table('post').get(news_id).count().run(connection)
+#     results=list(r.db('hackjobs').table('post').get(news_id).run(connection))
+#     count=len(results)
+#     user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
+#     name=user[0]['name']
+#     logout='(logout)'
+#     if count>0:
+#         results=list(r.db('hackjobs').table('post').get(news_id).run(connection))
+#         print (results)
+#         return json.dumps(results)
+#         #return render_template('news.html',results=results,title=results[0]['title'],name=name,logout=logout)
+#     else:
+
+#         return render_template('news.html',results=[],name=name,logout=logout,title="No news found")
+
+
+
