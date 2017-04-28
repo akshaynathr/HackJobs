@@ -31,7 +31,7 @@ def test():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    app.logger.info('404 error'+request.url)
+    #app.logger.info('404 error'+request.url)
     return render_template('404.html'), 404
 
 
@@ -49,9 +49,12 @@ def home(page):
         page=None
         
     if session.get('id',None):
-        user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
-        name=user[0]['name']
-        logout='(logout)'
+        count=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).count().run(connection))
+        if count>1:
+            user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
+        
+            name=user[0].get('name','')
+            logout='(logout)'
     
     connection.close()
     
@@ -201,23 +204,26 @@ def admin():
 
 
 
-# @app.route('/news/<news_id>')
-# def news(news_id):
-#     connection=r.connect('localhost',28015)
-#     #count=r.db('hackjobs').table('post').get(news_id).count().run(connection)
-#     results=list(r.db('hackjobs').table('post').get(news_id).run(connection))
-#     count=len(results)
-#     user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
-#     name=user[0]['name']
-#     logout='(logout)'
-#     if count>0:
-#         results=list(r.db('hackjobs').table('post').get(news_id).run(connection))
-#         print (results)
-#         return json.dumps(results)
-#         #return render_template('news.html',results=results,title=results[0]['title'],name=name,logout=logout)
-#     else:
+@app.route('/news/<path:path>')
+def news(path):
+    connection=r.connect('localhost',28015)
+    #count=r.db('hackjobs').table('post').get(news_id).count().run(connection)
+    results=list(r.db('hackjobs').table('post').filter(r.row['id']==path).run(connection))
+    count=len(results)
+    name=''
+    if session.get('id',None):
+        user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
+        name=user[0]['name']
 
-#         return render_template('news.html',results=[],name=name,logout=logout,title="No news found")
+    logout='(logout)'
+    if count>0:
+        #results=list(r.db('hackjobs').table('post').get(path).run(connection))
+        print (results)
+        #return json.dumps(results)
+        return render_template('news.html',results=results,title=results[0]['title'],name=name,logout=logout)
+    else:
+
+        return render_template('news.html',results=[],name=name,logout=logout,title="No news found")
 
 
 @app.route('/<path:path>')
@@ -226,3 +232,7 @@ def static_proxy(path):
   return app.send_static_file(path)
 
 
+
+@app.route('/subscribe')
+def subscribe():
+    return render_template('subscribe.html')
