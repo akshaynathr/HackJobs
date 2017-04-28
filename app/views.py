@@ -218,7 +218,7 @@ def news(path):
     logout='(logout)'
     if count>0:
         #results=list(r.db('hackjobs').table('post').get(path).run(connection))
-        print (results)
+        #print (results)
         #return json.dumps(results)
         return render_template('news.html',results=results,title=results[0]['title'],name=name,logout=logout)
     else:
