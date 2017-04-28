@@ -4,13 +4,33 @@
 <head>
 
     <meta charset="utf-8">
-    <meta property="og:image" content="{{ url_for('static',filename='favicon.ico') }}">
+    <meta property="og:image" content="{{ url_for('static',filename='/fav/favicon-32x32.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
     <meta name="description" content="Hackjobs is online job board like hackernews maintained by community.">
     <meta name="author" content="Akshaynath R">
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon"  href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
+        
+    <link rel="apple-touch-icon" sizes="57x57" href="/fav/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/fav/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/fav/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/fav/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/fav/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/fav/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/fav/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/fav/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/fav/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/fav/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/fav/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16x16.png">
+    <link rel="manifest" href="/fav/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/fav/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
     <title>Hack Jobs: Hackernews for programming jobs</title>
     <script charset="UTF-8" src="//cdn.sendpulse.com/28edd3380a1c17cf65b137fe96516659/js/push/c7eea1085166ff845eddd13ccef6aa8c_1.js" async></script>
 
@@ -82,8 +102,8 @@ mixpanel.init("8b67a95c1665cb191b3e21c193c25d9f");</script><!-- end Mixpanel -->
                 <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> --> 
                 <p style="font-size:95%; display:inline;margin-bottom:5px; margin-right: 0px;">
 
-                    <a id="post" style="color: black;" href='/news/{{ r.id }}' target="_blank">{{loop.index}}. {{r.title}}</a></p>
-                    <a href="{{ r.link }}">
+                    <a id="post" style="color: black;" href='/news/{{ r.id }}' >{{loop.index}}. {{r.title}}</a></p>
+                    <a href="{{ r.link }}" target="_blank">
                     <i style="color: rgba(0,0,0,.4); font-size: 70%; margin-left:10px;">({{r.link}}) {{ r.time.strftime('%Y-%m-%d')  }} </i>
                     </a>
                     <br>
