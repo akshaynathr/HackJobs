@@ -49,7 +49,7 @@ def home(page):
         page=None
         
     if session.get('id',None):
-        count=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).count().run(connection))
+        count=(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).count().run(connection)
         if count>1:
             user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
         
