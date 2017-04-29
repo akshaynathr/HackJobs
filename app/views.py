@@ -36,6 +36,12 @@ def page_not_found(e):
 
 
 
+@app.errorhandler(500)
+def page_not_found(e):
+    #app.logger.info('404 error'+request.url)
+    return render_template('500.html'), 500
+
+
 @app.route('/', defaults={'page': 0})
 @app.route('/page/<int:page>')
 def home(page):
@@ -47,7 +53,8 @@ def home(page):
     result=list(r.db('hackjobs').table('post').order_by(index=r.desc('time')).run(connection))
     if skip_no+30>=c:
         page=None
-        
+    
+
     if session.get('id',None):
         count=r.db('hackjobs').table('user').filter(r.row['id']==session['id']).count().run(connection)
         if count>1:
