@@ -220,7 +220,7 @@ def news(path):
     name=''
     if session.get('id',None):
         user=list(r.db('hackjobs').table('user').filter(r.row['id']==session['id']).run(connection))
-        name=user[0]['name']
+        name=user[0].get('name','')
 
     logout='(logout)'
     if count>0:
