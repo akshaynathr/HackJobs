@@ -6,6 +6,8 @@ from logging.handlers import RotatingFileHandler
 import os
 import json
 
+from moderator import modBot
+
 app=Flask(__name__, static_folder='static')
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 dbSetUp()
@@ -154,11 +156,19 @@ def add():
         title=request.form['title']
         link=request.form['link']
         text=request.form['text']
+        bot=modBot(title,link,text)
+
         userid=session['id']
-        app.logger.error('New post added:'+title+' Link:'+link+' '+' Text:'+text)
-        connection=r.connect('localhost',28015)
-        r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text,'userid':userid,'time':r.now()}).run(connection)
-        return redirect(url_for('home'))
+        if bot.check()==True:
+            connection=r.connect('localhost',28015)
+            r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text,'userid':userid,'time':r.now()}).run(connection)
+            app.logger.error('New post added:'+title+' Link:'+link+' '+' Text:'+text)
+
+            return redirect(url_for('home'))
+
+        else :
+            flash("Submission has been removed by ''autoModeratorBot'' for vulgar or invalid content") 
+            return render_template('add.html')
 
 
 @app.route('/user',methods=['GET','POST'])

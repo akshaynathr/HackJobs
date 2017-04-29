@@ -69,6 +69,16 @@
 			    
 		    </div>
                     <div class="col-lg-10" id="main">
+                    <br/>
+                    {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                <ul class=flashes style="text-decoration-style: none; color: white;list-style: none; background-color: green;">
+                                {% for message in messages %}
+                                  <li><b>{{ message }}</b></li>
+                                {% endfor %}
+                                </ul>
+                              {% endif %}
+                            {% endwith %}
                     <form method="POST">
           <label> Add new post</label><br><br>
 		  <label for="title"> Title </label>
