@@ -158,7 +158,12 @@ def add():
         text=request.form['text']
         bot=modBot(title,link,text)
 
-        userid=session['id']
+        if session.get('id',None):
+
+            userid=session.get('id','')
+        else:
+            return redirect(url_for('login'))
+        
         if bot.check()==True:
             connection=r.connect('localhost',28015)
             r.db('hackjobs').table('post').insert({'title':title,'link':link,'text':text,'userid':userid,'time':r.now()}).run(connection)
