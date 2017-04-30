@@ -114,7 +114,7 @@ def login():
         connection.close()
          
         if count==1:
-            session['id']=user[0]['id']
+            session['id']=user[0].get('id','')
             return redirect(url_for('user'))
         else:
             flash("No user found")
