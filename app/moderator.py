@@ -12,9 +12,9 @@ class modBot:
 
 	def dirty_word_check(self):
 		for i in self.word_list:
-			print(i)
+			#print(i)
 			res=self.TEXT.find(i)
-			print(res)
+			#print(res)
 			if res!=-1:
 				#print (i)
 				return True
